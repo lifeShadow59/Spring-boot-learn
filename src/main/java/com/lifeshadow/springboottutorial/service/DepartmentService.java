@@ -1,6 +1,7 @@
 package com.lifeshadow.springboottutorial.service;
 
 import com.lifeshadow.springboottutorial.entity.Department;
+import com.lifeshadow.springboottutorial.error.DepartmentNotFoundException;
 
 import java.util.List;
 
@@ -9,7 +10,7 @@ public interface DepartmentService {
 
     public List<Department> getAllDepartment();
 
-    public Department getDepartmentById(Long id);
+    public Department getDepartmentById(Long id) throws DepartmentNotFoundException;
 
     public void deleteDepartmentById(Long id);
 

@@ -1,6 +1,7 @@
 package com.lifeshadow.springboottutorial.controller;
 
 import com.lifeshadow.springboottutorial.entity.Department;
+import com.lifeshadow.springboottutorial.error.DepartmentNotFoundException;
 import com.lifeshadow.springboottutorial.service.DepartmentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,9 +31,9 @@ public class DepartmentController {
     }
 
     @GetMapping("/departments/{id}")
-    public Department getDepartmentById(@PathVariable("id") Long id){
+    public Department getDepartmentById(@PathVariable("id") Long id) throws DepartmentNotFoundException {
         this.logger.info("Inside get department of DepartmentController.");
-        return  this.departmentService.getDepartmentById(id);
+        return this.departmentService.getDepartmentById(id);
     }
 
     @DeleteMapping("/departments/{id}")

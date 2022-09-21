@@ -2,16 +2,22 @@ package com.lifeshadow.springboottutorial.service;
 
 
 import com.lifeshadow.springboottutorial.entity.Department;
+import com.lifeshadow.springboottutorial.error.DepartmentNotFoundException;
 import com.lifeshadow.springboottutorial.repository.DepartmentRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DepartmentServiceImpl implements DepartmentService {
 
-    @Autowired
+    final Logger logger = LoggerFactory.getLogger(DepartmentServiceImpl.class);
+
+    @Autowired()
     private DepartmentRepository departmentRepository;
 
     @Override
@@ -25,8 +31,17 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public Department getDepartmentById(Long id) {
-        return this.departmentRepository.findById(id).get();
+    public Department getDepartmentById(Long id) throws DepartmentNotFoundException {
+
+        Optional<Department> department =
+                this.departmentRepository.findById(id);
+        if (department.isEmpty()) {
+            this.logger.info("Department not found. id: " + id);
+            throw new DepartmentNotFoundException("Department not found");
+
+        }
+        this.logger.info("Department found successfully. id: " + id);
+        return department.get();
     }
 
     @Override
