@@ -6,15 +6,15 @@ import com.lifeshadow.springboottutorial.error.DepartmentNotFoundException;
 import java.util.List;
 
 public interface DepartmentService {
-    public Department saveDepartment(Department department);
+    Department saveDepartment(Department department);
 
-    public List<Department> getAllDepartment();
+    List<Department> getAllDepartment();
 
-    public Department getDepartmentById(Long id) throws DepartmentNotFoundException;
+    Department getDepartmentById(Long id) throws DepartmentNotFoundException;
 
-    public void deleteDepartmentById(Long id);
+    void deleteDepartmentById(Long id);
 
-    public Department updateDepartmentById(Long id, Department department);
+    Department updateDepartmentById(Long id, Department department);
 
-    public Department getDepartmentsByName(String name);
+    Department getDepartmentsByName(String name);
 }
